@@ -1,23 +1,30 @@
 # 💰 Smart Expense Tracker
 
-<div align="center">
+> A modern, AI-powered personal finance & shared group expense tracker built with Next.js 16, React 19, Prisma 7, SQLite, and Google Gemini AI.
 
-![Next.js 16](https://img.shields.io/badge/Next.js-16.4-black?style=for-the-badge&logo=next.js)
-![React 19](https://img.shields.io/badge/React-19.3-blue?style=for-the-badge&logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue?style=for-the-badge&logo=typescript)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.3-38B2AC?style=for-the-badge&logo=tailwind-css)
-![Prisma](https://img.shields.io/badge/Prisma-7.10-2D3748?style=for-the-badge&logo=prisma)
-![Google Gemini AI](https://img.shields.io/badge/Gemini%20AI-Flash-8E75C2?style=for-the-badge&logo=google)
-![SQLite](https://img.shields.io/badge/SQLite-Database-003B57?style=for-the-badge&logo=sqlite)
-![Vitest](https://img.shields.io/badge/Vitest-5.0-6E9F18?style=for-the-badge&logo=vitest)
+![Next.js 16](https://img.shields.io/badge/Next.js-16.4-black?style=flat-square&logo=next.js)
+![React 19](https://img.shields.io/badge/React-19.3-blue?style=flat-square&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue?style=flat-square&logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.3-38B2AC?style=flat-square&logo=tailwind-css)
+![Prisma](https://img.shields.io/badge/Prisma-7.10-2D3748?style=flat-square&logo=prisma)
+![Google Gemini AI](https://img.shields.io/badge/Gemini%20AI-Flash-8E75C2?style=flat-square&logo=google)
+![SQLite](https://img.shields.io/badge/SQLite-Database-003B57?style=flat-square&logo=sqlite)
+![Vitest](https://img.shields.io/badge/Vitest-5.0-6E9F18?style=flat-square&logo=vitest)
 
-<p align="center">
-  <b>A modern, AI-powered personal finance & shared group expense tracker built with Next.js 16, Prisma 7, SQLite, and Google Gemini AI.</b>
-</p>
+---
 
-[Key Features](#-key-features) • [Screenshots](#-screenshots) • [Tech Stack](#-tech-stack) • [Getting Started](#-getting-started) • [API Reference](#-api-reference)
+### Navigation
 
-</div>
+- [🌟 Overview](#-overview)
+- [✨ Key Features](#-key-features)
+- [📸 Screenshots](#-screenshots)
+- [🛠️ Tech Stack](#️-tech-stack)
+- [🚀 Getting Started](#-getting-started)
+- [🧪 Testing](#-testing)
+- [📁 Project Structure](#-project-structure)
+- [🔌 API Reference](#-api-reference)
+- [🔒 Security & Precision](#-security--precision)
+
 
 ---
 
@@ -57,35 +64,35 @@ All monetary amounts are strictly computed and persisted in integer minor units 
 ## 📸 Screenshots
 
 ### 1. Dashboard & Financial Analytics
-> Real-time cashflow overview, monthly budget progress bar, active savings goals, and recent activity.
+Real-time cashflow overview, monthly budget progress bar, active savings goals, and recent activity.
 
 ![Dashboard Overview](docs/screenshots/dashboard_overview.png)
 
 ---
 
 ### 2. AI Bank Statement Analyzer
-> Upload monthly bank statements (PDF, CSV, Image) to extract income, expenses, and transaction tables with smart auto-categorization and batch import into your ledger.
+Upload monthly bank statements (PDF, CSV, Image) to extract income, expenses, and transaction tables with smart auto-categorization and batch import into your ledger.
 
 ![Statement Analysis](docs/screenshots/statement_analysis.png)
 
 ---
 
 ### 3. Transactions Ledger
-> Filter by month, transaction type, or category with one-click CSV and PDF export.
+Filter by month, transaction type, or category with one-click CSV and PDF export.
 
 ![Transactions Ledger](docs/screenshots/transactions_ledger.png)
 
 ---
 
 ### 4. Budget & Goal Tracking
-> Overall monthly budgets with category-level thresholds and visual progress indicators.
+Overall monthly budgets with category-level thresholds and visual progress indicators.
 
 ![Budget Management](docs/screenshots/budget_management.png)
 
 ---
 
 ### 5. Group Expenses & Debt Simplification
-> Track who owes whom with automatic debt minimization and settlement logging.
+Track who owes whom with automatic debt minimization and settlement logging.
 
 ![Group Details](docs/screenshots/group_details.png)
 
@@ -231,7 +238,7 @@ npx vitest run tests/m7-f18-scan.test.ts
 
 ---
 
-## 🔒 Security & Data Integrity
+## 🔒 Security & Precision
 
 - **Paise Precision**: All currency stored as integer minor units (`amountMinor` in paise) — zero floating-point drift.
 - **Formula Injection Safeguards**: CSV exports sanitize leading `=`, `+`, `-`, `@` characters to protect against spreadsheet formula injection.
@@ -239,7 +246,6 @@ npx vitest run tests/m7-f18-scan.test.ts
 - **Ephemeral AI Processing**: Scanned receipts and bank statements are processed purely in-memory buffers and never written to disk.
 
 ---
-
 
 #   s m a r t - e x p e n s e - t r a c k e r  
  
