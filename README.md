@@ -244,4 +244,5 @@ npx vitest run tests/m7-f18-scan.test.ts
 
 This project is licensed under the [MIT License](LICENSE).
 #   s m a r t - e x p e n s e - t r a c k e r  
+ #   s m a r t - e x p e n s e - t r a c k e r  
  

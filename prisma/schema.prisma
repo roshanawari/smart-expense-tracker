@@ -1,0 +1,171 @@
+datasource db {
+  provider = "sqlite"
+}
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+enum CategoryType {
+  INCOME
+  EXPENSE
+}
+
+enum SplitMethod {
+  EQUAL
+  PERCENT
+  EXACT
+}
+
+model Category {
+  id           String        @id @default(cuid())
+  name         String
+  type         CategoryType
+  transactions Transaction[]
+  budgets      Budget[]
+
+  @@unique([name, type])
+}
+
+model User {
+  id                  String          @id @default(cuid())
+  name                String
+  email               String          @unique
+  passwordHash        String
+  monthlyBudgetMinor  Int?
+  createdAt           DateTime        @default(now())
+  transactions        Transaction[]
+  budgets             Budget[]
+  savingsGoals        SavingsGoal[]
+  friendshipsA        Friendship[]    @relation("FriendshipA")
+  friendshipsB        Friendship[]    @relation("FriendshipB")
+  createdGroups       Group[]         @relation("GroupCreator")
+  groupMemberships    GroupMember[]
+  paidExpenses        SharedExpense[] @relation("ExpensePayer")
+  createdExpenses     SharedExpense[] @relation("ExpenseCreator")
+  expenseShares       ExpenseShare[]
+  sentSettlements     Settlement[]    @relation("SettlementFrom")
+  receivedSettlements Settlement[]    @relation("SettlementTo")
+}
+
+model Transaction {
+  id          String       @id @default(cuid())
+  userId      String
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categoryId  String
+  category    Category     @relation(fields: [categoryId], references: [id])
+  type        CategoryType
+  amountMinor Int
+  date        String
+  description String?
+  createdAt   DateTime     @default(now())
+
+  @@index([userId, date])
+}
+
+model Budget {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id])
+  amountMinor Int
+
+  @@unique([userId, categoryId])
+}
+
+model SavingsGoal {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name        String
+  targetMinor Int
+  savedMinor  Int      @default(0)
+  targetDate  String?
+  createdAt   DateTime @default(now())
+}
+
+model Friendship {
+  id        String   @id @default(cuid())
+  userAId   String
+  userA     User     @relation("FriendshipA", fields: [userAId], references: [id], onDelete: Cascade)
+  userBId   String
+  userB     User     @relation("FriendshipB", fields: [userBId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userAId, userBId])
+  @@index([userAId])
+  @@index([userBId])
+}
+
+model Group {
+  id          String          @id @default(cuid())
+  name        String
+  createdById String
+  createdBy   User            @relation("GroupCreator", fields: [createdById], references: [id], onDelete: Cascade)
+  createdAt   DateTime        @default(now())
+  members     GroupMember[]
+  expenses    SharedExpense[]
+  settlements Settlement[]
+}
+
+model GroupMember {
+  id       String   @id @default(cuid())
+  groupId  String
+  group    Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  userId   String
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  joinedAt DateTime @default(now())
+
+  @@unique([groupId, userId])
+}
+
+model SharedExpense {
+  id          String         @id @default(cuid())
+  groupId     String?
+  group       Group?         @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  paidById    String
+  paidBy      User           @relation("ExpensePayer", fields: [paidById], references: [id], onDelete: Cascade)
+  totalMinor  Int
+  description String
+  date        String
+  splitMethod SplitMethod
+  createdById String
+  createdBy   User           @relation("ExpenseCreator", fields: [createdById], references: [id], onDelete: Cascade)
+  createdAt   DateTime       @default(now())
+  shares      ExpenseShare[]
+
+  @@index([groupId])
+  @@index([paidById])
+  @@index([date])
+}
+
+model ExpenseShare {
+  id         String        @id @default(cuid())
+  expenseId  String
+  expense    SharedExpense @relation(fields: [expenseId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  shareMinor Int
+
+  @@unique([expenseId, userId])
+}
+
+model Settlement {
+  id          String   @id @default(cuid())
+  groupId     String?
+  group       Group?   @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  fromUserId  String
+  fromUser    User     @relation("SettlementFrom", fields: [fromUserId], references: [id], onDelete: Cascade)
+  toUserId    String
+  toUser      User     @relation("SettlementTo", fields: [toUserId], references: [id], onDelete: Cascade)
+  amountMinor Int
+  date        String
+  note        String?
+  createdAt   DateTime @default(now())
+
+  @@index([groupId])
+  @@index([fromUserId])
+  @@index([toUserId])
+}
