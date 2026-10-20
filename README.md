@@ -118,7 +118,7 @@ All monetary amounts are strictly computed and persisted in integer minor units 
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/smart-expense-tracker.git
+git clone https://github.com/roshanawari/smart-expense-tracker.git
 cd smart-expense-tracker
 ```
 
@@ -240,9 +240,6 @@ npx vitest run tests/m7-f18-scan.test.ts
 
 ---
 
-## 📄 License
 
-This project is licensed under the [MIT License](LICENSE).
 #   s m a r t - e x p e n s e - t r a c k e r  
- #   s m a r t - e x p e n s e - t r a c k e r  
  
