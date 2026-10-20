@@ -18,7 +18,7 @@
 - [🌟 Overview](#-overview)
 - [✨ Key Features](#-key-features)
 - [📸 Screenshots](#-screenshots)
-- [🛠️ Tech Stack](#️-tech-stack)
+- [🛠️ Tech Stack](#tech-stack)
 - [🚀 Getting Started](#-getting-started)
 - [🧪 Testing](#-testing)
 - [📁 Project Structure](#-project-structure)
@@ -246,6 +246,5 @@ npx vitest run tests/m7-f18-scan.test.ts
 - **Ephemeral AI Processing**: Scanned receipts and bank statements are processed purely in-memory buffers and never written to disk.
 
 ---
-
 #   s m a r t - e x p e n s e - t r a c k e r  
  
