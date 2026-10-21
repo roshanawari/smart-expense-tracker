@@ -23,7 +23,12 @@ const statementResponseSchema = z.object({
       transactionCount: z.number().optional().default(0),
     })
     .optional()
-    .default({}),
+    .default({
+      totalIncome: 0,
+      totalExpense: 0,
+      netSavings: 0,
+      transactionCount: 0,
+    }),
   transactions: z.array(statementTransactionSchema).default([]),
 });
 
